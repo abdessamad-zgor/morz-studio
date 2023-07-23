@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Moirai+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,700&display=swap');
+
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
