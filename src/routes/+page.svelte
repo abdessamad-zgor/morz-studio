@@ -1,26 +1,48 @@
 
-<script></script>
+<script lang="ts">
+import Home from "../components/Home.svelte";
+import Pitch from "../components/Pitch.svelte";
+import Work from "../components/Work.svelte";
+import { index } from "$lib";
 
-<section id="banner" class="w-full min-h-screen px-20 pt-40 ">
-<h1 class="font-extrabold text-[150px] text-amber-200 font-bodo">Morz Studio</h1>
-<p class="w-6/12 pl-20 text-3xl border-b-8 font-mo bg-amber-200 border-sky-600 text-sky-950">
-un studio creative à mission d'exprimer votre vision artistique en code
-</p>
-<div class="flex flex-row justify-end w-full my-20">
+let tape : HTMLDivElement
+let currentIndex:number = $index
+// if index increases slide the div by 100 vw
+index.subscribe(()=>{
+    console.log("Reactive currentIndex ", currentIndex, " $index store ", $index);
+    if (currentIndex-$index>0){
+        console.log("Tape ", currentIndex-$index)
 
-<button id="btn" class="px-8 py-2 text-xl rounded bg-amber-600 text-uppercase text-sky-100">réserver un appel</button>
-</div> 
-</section>
+        tape.animate(
+        [{transform: `translateX(-100vw)`}
+        ,{transform: `translateX(0)`}],
+        {duration: 800,
+        easing:"ease",
+        fill: "forwards"}); 
+
+
+        currentIndex = $index
+    }else if(currentIndex-$index<0){
+        console.log("Tape ", currentIndex-$index)
+    
+    tape.animate([{transform: `translateX(0)`},{transform: `translateX(-${($index)*100}vw)`}],
+    {duration: 800,easing:"ease", fill:"forwards"});
+
+        currentIndex = $index
+    }
+});
+
+</script>
+
+<div bind:this={tape} class="flex flex-row w-[200vw]">
+<Home/>
+<Work/>
+<Pitch/> 
+</div>
 
 <style>
-#banner{
-    background-image: url("banner-bg.png");
-    background-size: 70%;
-    background-repeat: repeat;
+*{
+cursor: cell;
 }
-
-#btn {
-    box-shadow: -5px 5px 0 aliceblue;
-}
-
 </style>
+
