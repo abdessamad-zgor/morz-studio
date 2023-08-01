@@ -1,22 +1,29 @@
 
 <script lang="ts">
-    import {index} from "$lib";
+import Stripe from "./Stripe.svelte";
+import {index} from "$lib";
     function slide(dir: -1|1){
         console.log("slide to ", dir)
         index.set($index+dir)
     }
  
 </script>
-<section id="banner" class="w-[100vw] relative min-h-screen px-20 pt-40 ">
-<h1 class="font-extrabold text-[150px] text-amber-200 font-bodo">Morz Studio</h1>
-<p class="w-6/12 pl-20 text-3xl border-b-8 font-mo bg-amber-200 border-sky-600 text-sky-950">
-un studio creative à mission d'exprimer votre vision artistique en code
-</p>
-<div class="flex flex-row justify-end w-full my-20">
 
-<button id="btn" class="px-8 py-2 text-xl rounded bg-amber-600 text-uppercase text-sky-100">réserver un appel</button>
-</div>
-<div class="absolute top-0 bottom-0 right-0 z-10 p-20" on:click={()=>slide(1)}></div>
+<section  class="w-[100vw] z-0 relative min-h-screen backdrop-blur bg-amber-100 bg-slate-100 relative">
+
+    <div class="relative flex flex-row justify-end px-10">
+        <h1 class="font-extrabold absolute z-10 text-[400px] text-sky-700 font-bodo">Morz
+
+        <span class=" absolute bottom-[100px] right-0 z-[12] px-20 text-xl font-bold font-noto">Studio</span>
+        </h1>
+        
+    </div>
+
+    <p class="px-20 text-5xl absolute bottom-[20px] font-bold font-mo text-amber-400">
+    a creative studio for code crafted websites <br> we make cool things and we love it .
+    </p>
+    <div class="absolute top-0 bottom-0 right-0 z-10 p-20" on:click={()=>slide(1)}></div>
+    <Stripe />
 </section>
 
 <style>
